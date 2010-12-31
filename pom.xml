@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+  xmlns                 =   "http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi             =   "http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation    =   "http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               INFORMATIONS                              -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <groupId>de.shoss.docbook.example</groupId>
+  <artifactId>simple-docbook</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Simple DocBook project using Maven</name>
+  <packaging>pom</packaging>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                PROPERTIES                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                  BUILD                                  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.agilejava.docbkx</groupId>
+        <artifactId>docbkx-maven-plugin</artifactId>
+        <version>2.0.11</version>
+        <executions>
+          <execution>
+            <id>draft-output</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>generate-pdf</goal>
+              <goal>generate-html</goal>
+            </goals>
+            <configuration>
+              <!-- per execution configuration -->
+              <draftMode>yes</draftMode>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <!-- shared configuration -->
+          <sourceDirectory>${basedir}/src/main/docbkx</sourceDirectory>
+          <includes>book.dbk</includes>
+          <generatedSourceDirectory>${project.build.directory}/docbkx/generated</generatedSourceDirectory>
+          <xincludeSupported>true</xincludeSupported>
+          <highlightSource>1</highlightSource>
+          <paperType>A4</paperType>
+          <fop1Extensions>1</fop1Extensions>
+          <foCustomization>src/main/resources/stylesheets/fo/docbook.xsl</foCustomization>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.docbook</groupId>
+            <artifactId>docbook-xml</artifactId>
+            <version>5.0</version>
+            <type>pom</type>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
