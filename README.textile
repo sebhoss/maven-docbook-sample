@@ -7,3 +7,5 @@ p. Prerequisites are "Java":http://java.com and "Maven":http://maven.apache.org/
 bc. git clone git://github.com/sebhoss/maven-docbook-sample.git
 cd maven-docbook-sample
 mvn pre-site
+
+p. Outputs can be found under @maven-docbook-sample/target/docbkx/@
